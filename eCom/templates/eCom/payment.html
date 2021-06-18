@@ -1,0 +1,41 @@
+{%extends "eCom/appbase.html" %}
+{% load bootstrap4 %}
+{%block content %}
+
+  <!--Main layout-->
+  <main>
+    <div class="container wow fadeIn">
+      <!-- Heading -->
+      <h2 class="my-5 h2 text-center">Payment</h2>
+
+        <!--Grid column-->
+        <div class="col-md-12 mb-4">
+
+          <!--Card-->
+          <div class="card">
+            <script src="https://js,stripe.com/v3/"></script>
+            <form action="/checkout" method="post" id="payment-form">
+              <div class="form">
+                <label for="credit element">
+                CREDIT OR DEBIT CARD
+                </label>
+              </div>
+                <button type="submit" class="btn btn-primary">CHeckout</button>
+                {% endbuttons %}
+              </form>
+            </div>
+          <!--/.Card-->
+          </div>
+
+
+
+    </div>
+  </main>
+  <!--Main layout-->
+
+
+
+
+
+
+{% endblock %}

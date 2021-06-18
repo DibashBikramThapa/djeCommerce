@@ -1,0 +1,74 @@
+{% extends "eCom/appbase.html" %}
+{% block content%}
+
+<h2>Order Summary</h2>
+<table class="table">
+  <thead >
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Item title</th>
+      <th scope="col">Price</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">Total Item Price</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for orderitem in object.items.all %}
+    <tr>
+      <th scope="row">{{ forloop.counter }}</th>
+      <td>{{orderitem.item.title}}</td>
+      <td>
+      {% if orderitem.item.discount_price  %}
+        {{orderitem.item.discount_price}}
+      {% else %}
+        {{orderitem.item.price}}
+      {% endif %}
+      </td>
+      <td>
+        <a href="{% url 'eCom:remove_single_item_from_cart' orderitem.item.pk%}"><i class="fas fa-minus ml-2"></i></a>
+        {{orderitem.quantity}}
+        <a href="{% url 'eCom:add_to_cart' orderitem.item.pk %}"><i class="fas fa-plus mr-2"></i></a>
+      </td>
+      <td>
+      {% if orderitem.item.discount_price  %}
+        {{orderitem.get_total_discount_price}}
+        <span class="badge badge-primary" >(Saving ${{ orderitem.saved_amount}})</span>
+      {% else %}
+        {{orderitem.get_total_item_price}}
+      {% endif %}
+      <a style='color:red;' href="{% url 'eCom:remove_from_cart' orderitem.item.pk %}">
+      <i class="fas fa-trash float-right"></i>
+      </a>
+      </td>
+    </tr>
+    {% empty%}
+    <tr>
+      <td colspan="5">Your Cart is empty</td>
+    </tr>
+    <tr>
+      <td colspan="5">
+        <a class="btn btn-default float-right ml-3" href="/">Continue Shopping</a>
+      </td>
+    </tr>
+    {% endfor %}
+    {% if object.get_total %}
+    <tr>
+      <td colspan="4"><b>Order Total</b></td>
+      <td ><b>${{ object.get_total}}</b></td>
+    </tr>
+
+    <tr>
+      <td colspan="5">
+        <a class="btn btn-default float-right ml-3" href="/">Continue Shopping</a>
+        <a class="btn btn-warning float-right" href="/checkout">Proceed to checkout</a>
+      </td>
+    </tr>
+    {% endif %}
+  </tbody>
+</table>
+
+
+
+
+
+{%endblock %}

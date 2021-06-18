@@ -18,7 +18,7 @@ LABEL_CHOICES=(
 
 class Item(models.Model):
     title = models.CharField(max_length=100)
-    pic=models.ImageField(upload_to='shirt_pic',blank=True)
+    shirt_pic=models.ImageField(upload_to='shirt_pic',blank=True)
     price=models.FloatField()
     discount_price=models.FloatField(blank=True,null=True)
     category=models.CharField(choices=CATEGORY_CHOICES,max_length=2)

@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'vw37i_&v$8v#xoak5*@t7bmre%4edyx%oo0a3b3sn4r^q8u@j#'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['djecompractise.herokuapp.com','127.0.0.1']
 
@@ -45,8 +45,6 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-
-    'whitenoise.middleware.WhiteNoiseMiddleware',
 
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -126,11 +124,14 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 #STATIC_ROOT=os.path.join(BASE_DIR,'static')
-STATIC_ROOT=os.path.join(BASE_DIR,'staticfiles')
+STATIC_ROOT=os.path.join(BASE_DIR,"staticfiles")
 
+#media
+MEDIA_ROOT = os.path.join(BASE_DIR,"staticfiles/media")
+MEDIA_URL = '/staticfiles/media/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR,'eCom/static/media')
-MEDIA_URL = '/media/'
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
 
 LOGIN_REDIRECT_URL = 'eCom:Home'
 LOGOUT_REDIRECT_URL = 'eCom:Home'

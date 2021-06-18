@@ -91,5 +91,5 @@ class BillingAddress(models.Model):
     country=CountryField(multiple=False)
     zip=models.CharField(max_length=100)
 
-    def __str__(slef):
+    def __str__(self):
         return self.user.username

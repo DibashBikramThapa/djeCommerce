@@ -1,7 +1,7 @@
 from django.db import models
 from django.shortcuts import reverse
 from django_countries.fields import CountryField
-
+from django.utils import timezone
 
 # Create your models here.
 CATEGORY_CHOICES=(
@@ -23,6 +23,7 @@ class Item(models.Model):
     discount_price=models.FloatField(blank=True,null=True)
     category=models.CharField(choices=CATEGORY_CHOICES,max_length=2)
     label=models.CharField(choices=LABEL_CHOICES,max_length=1)
+    create_date = models.DateTimeField(default=timezone.now())
     description=models.TextField()
 
     def get_absolute_url(self):

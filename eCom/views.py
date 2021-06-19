@@ -14,9 +14,10 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 class HomeView(ListView):
     model=Item
     paginate_by=4
-
     template_name='eCom/home-page.html'
 
+    def get_queryset(self):
+        return Item.objects.order_by('-create_date')
 
 class OrderSummaryView(LoginRequiredMixin, View):
     def get(self, *args, **kwargs):
@@ -34,6 +35,31 @@ class OrderSummaryView(LoginRequiredMixin, View):
 class ItemDetailView(DetailView):
     model = Item
     template_name='eCom/product-page.html'
+
+class ShirtView(ListView):
+    model=Item
+    paginate_by=4
+    template_name='eCom/home-page.html'
+
+    def get_queryset(self):
+        return Item.objects.filter(category='S').order_by('-create_date')
+
+class ShirtWearView(ListView):
+    model=Item
+    paginate_by=4
+    template_name='eCom/home-page.html'
+
+    def get_queryset(self):
+        return Item.objects.filter(category='SW').order_by('-create_date')
+
+class OutWearView(ListView):
+    model=Item
+    paginate_by=4
+    template_name='eCom/home-page.html'
+
+    def get_queryset(self):
+        return Item.objects.filter(category='OW').order_by('-create_date')
+
 
 class PaymentView(View):
     def get(self, *arags, **kwargs):
